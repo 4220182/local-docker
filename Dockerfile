@@ -13,5 +13,14 @@ RUN unzip consul-template_${CONSUL_TEMPLATE_VERSION}_linux_amd64.zip && \
     rm -rf /consul-template_${CONSUL_TEMPLATE_VERSION}_linux_amd64.zip && \
     mkdir -p /consul-template /consul-template/config.d /consul-template/templates && \
     apk add --no-cache curl
+
+ENV KUBE_LATEST_VERSION="v1.6.4"
+
+RUN apk add --update ca-certificates \
+ && apk add --update -t deps curl \
+ && curl -L https://storage.googleapis.com/kubernetes-release/release/${KUBE_LATEST_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl \
+ && chmod +x /usr/local/bin/kubectl \
+ && apk del --purge deps \
+ && rm /var/cache/apk/*
  
 COPY docker-entrypoint.sh /usr/local/bin/
