@@ -1,5 +1,8 @@
 FROM docker:latest
 
+COPY ./remove-po.sh /remove-po.sh
+RUN chmod +x /remove-po.sh
+
 RUN apk add --no-cache bash \
                        py-pip
 RUN pip install docker-compose
