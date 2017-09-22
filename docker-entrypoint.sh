@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e
 
+echo "OK" >/tmp/ok.log
+
 # first arg is `-f` or `--some-option`
 if [ "${1#-}" != "$1" ]; then
 	set -- docker "$@"
