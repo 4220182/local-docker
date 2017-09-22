@@ -27,3 +27,6 @@ RUN apk add --update ca-certificates \
  && rm /var/cache/apk/*
  
 COPY docker-entrypoint.sh /usr/local/bin/
+
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["sh"]
